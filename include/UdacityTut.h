@@ -19,8 +19,10 @@ private:
   ros::Publisher pub_cloud_raw_;
   ros::Publisher pub_cloud_downsampled_;
   ros::Publisher pub_cloud_groundless_;
-//  addition
+//  ground point cloud publisher
   ros::Publisher pub_cloud_ground_;
+  ros::Publisher pub_eucledian_clusterer_;
+
 
   ros::NodeHandle& nh_;
 

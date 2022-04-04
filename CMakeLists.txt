@@ -32,7 +32,8 @@ add_executable(${PROJECT_NAME}_exec
         src/main.cpp
         src/PclStuff.cpp
         src/RosRelated.cpp
-        src/UdacityTut.cpp)
+        src/UdacityTut.cpp
+        src/deneme.cpp)
 
 add_dependencies(${PROJECT_NAME}_exec
         ${catkin_EXPORTED_TARGETS})

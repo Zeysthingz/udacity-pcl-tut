@@ -14,6 +14,10 @@ UdacityTut::UdacityTut(ros::NodeHandle &nh) : nh_(nh) {
   pub_cloud_ground_= nh.advertise<sensor_msgs::PointCloud2>
           ("/cloud_ground", 1);
 
+
+
+  pub_eucledian_clusterer_= nh.advertise<sensor_msgs::PointCloud2>
+          ("/cloud_cluster", 1);
 //  // Subscribers
 //  sub_velodyne_points_ = nh.subscribe("/velodyne_points", 1,
 //                                      &UdacityTut::CallbackLaser, this);
@@ -37,12 +41,19 @@ UdacityTut::CallbackLaser(const sensor_msgs::PointCloud2ConstPtr &msg_cloud) {
 
   // Remove ground from the downsampled point cloud
 //  downsample yanı arttırılmıs data ground remover fonksıyonuna gırıyor
-  Cloud::Ptr cloud_groundless = PclStuff::GroundRemover(cloud_ds, 0.5f);
+  Cloud::Ptr cloud_groundless = PclStuff::GroundRemover(cloud_ds, 0.3f);
   RosRelated::PublishCloud(cloud_groundless, pub_cloud_groundless_);
 
   // My addition cpublisdshes a node named as cloud_ground
+//   gives downsample object cloud_ds to ground finder function
   Cloud::Ptr cloud_ground = PclStuff::GroundFinder(cloud_ds, 0.5f);
   RosRelated::PublishCloud(cloud_ground, pub_cloud_ground_);
+
+
+// Euclidean Cluster Function
+    Cloud::Ptr cloud_cluster = PclStuff::EucledianCluster(cloud_groundless);
+    RosRelated::PublishCloud(cloud_cluster, pub_eucledian_clusterer_);
+
 
 
 }

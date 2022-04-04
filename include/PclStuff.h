@@ -28,6 +28,9 @@ public:
 
   static Cloud::Ptr
   GroundFinder(Cloud::ConstPtr cloud_in, float treshold = 0.2);
+
+  static Cloud::Ptr
+  EucledianCluster(Cloud::ConstPtr cloud_in);
 };
 
 
